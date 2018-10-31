@@ -1,0 +1,26 @@
+<div class="users-new-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4 sports-info-container">
+        <h1 class="text-center text-white">会員削除</h1>
+        <div class="events_text">ユーザー名：
+          <%= @user.name %>
+        </div>
+        <div class="events_text">メールアドレス：
+          <%= @user.email %>
+        </div>
+        <div class="events_text">好きなスポーツ：
+          <%= @user.splike %>
+        </div>
+        <div class="events_text">コメント：
+          <%= @user.comment %>
+        </div>
+
+        <%= link_to "削除する", user_path(current_user.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+        <%= link_to users_mypage_path do %>
+          <div class="events_text">戻る</div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+</div>

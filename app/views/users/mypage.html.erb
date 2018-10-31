@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 sports-info-container">
+      <div class="events_text">ユーザー情報</div>
+      <div class="events-container">
+        <div class="events_text">ユーザー名：
+          <%= @user.name %>
+        </div>
+        <% if @user.image.url != nil %>
+          <div class="events_text">画像：
+            <%= image_tag @user.image.url %>
+          </div>
+        <% else %>
+          <div class="events_text">画像：
+            <%= image_tag 'noimage.svg' %>
+          </div>
+        <% end %>
+        <div class="events_text">メールアドレス：
+          <%= @user.email %>
+        </div>
+        <div class="events_text">好きなスポーツ：
+          <%= @user.splike %>
+        </div>
+        <div class="events_text">コメント：
+          <%= @user.comment %>
+        </div>
+        <%= link_to users_edit_path do %>
+          <div class="events_text">編集</div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6 sports-info-container">
+      <div class="events_text">イベント日程</div>
+      <div class="events-container">
+      </div>
+    </div>
+  </div>
+</div>

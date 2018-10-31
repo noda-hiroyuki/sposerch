@@ -1,0 +1,42 @@
+<h1>スポサチ</h1>
+<h2>スポーツイベント</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8 sports-info-container">
+      <div class="row">
+        <div class="col-md-12 sports-info-container">
+          <div class="events_text">イベントタイトル</div>
+          <h1 class="events_text">タイトル</h1>
+          <h1 class="events_text">タイトル</h1>
+          <div class="events-container">
+            <%= link_to topics_show_path do %>
+              <div class="events_text">11/4</div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-12 sports-info-container">
+          <div class="events_text">スポーツの仕事</div>
+          <div class="events-container">
+            <div class="events_text">11/4</div>
+          </div>
+        </div>
+        <div class="col-md-12 sports-info-container">
+          <div class="events_text">いろんなスポーツの紹介</div>
+          <div class="events-container">
+            <div class="events_text">11/4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-offset-1 col-md-2 sports-info-container">
+      <div class="events-container">
+        <%= link_to datasels_index_path do %>
+        <h1 class="events_text">詳細検索</h1>
+        <% end %>
+      </div>
+      <div class="events-container">
+        <h1 class="events_text">閲覧履歴</h1>
+      </div>
+    </div>
+  </div>
+</div>

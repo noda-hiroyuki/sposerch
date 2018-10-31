@@ -1,0 +1,40 @@
+h1,h2{
+  font-weight: 100;
+}
+
+.text-black{
+  color: #565656;
+}
+
+.sports-info-container{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  border: 1px solid #565656;
+  h1{
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  .events_text{
+    font-size:  20px;
+    color: #565656;
+  }
+  .events-container{
+    padding-top: 10px;
+    border: 1px solid #565656;
+    margin-bottom: 20px;
+  }
+}
+
+.btn-black {
+  color: #565656;
+  border: 1px solid #565656;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 20px;
+  background-color: rgba(0,0,0,0.0);
+
+  &:hover {
+    color: #565656;
+  }
+}

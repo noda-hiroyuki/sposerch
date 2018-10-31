@@ -1,0 +1,30 @@
+<div class="users-new-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-4 col-md-4">
+        <h1 class="text-center text-white">会員登録</h1>
+        <%= form_for @user do |f| %>
+          <div class="form-group">
+            <%= f.label :ユーザー名, class: 'text-white' %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email, class: 'text-white' %>
+            <%= f.text_field :email, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password, class: 'text-white' %>
+            <%= f.password_field :password, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :再確認, class: 'text-white' %>
+            <%= f.password_field :password_confirmation, class: 'form-control' %>
+          </div>
+
+          <%= f.submit "登録", class: 'btn-block btn-white' %>
+          <% end %>
+          <%= link_to 'ログインはこちら', login_path,class: 'text-black' %>
+        </div>
+      </div>
+    </div>
+</div>

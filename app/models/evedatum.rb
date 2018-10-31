@@ -1,0 +1,2 @@
+class Evedatum < ApplicationRecord
+end
