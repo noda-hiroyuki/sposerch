@@ -1,2 +1,22 @@
-<h1>Datasels#show</h1>
-<p>Find me in app/views/datasels/show.html.erb</p>
+<div class="users-new-container">
+  <h1 class="text-center text-white">検索結果</h1>
+  <h3 class="text-center text-white"><%= @count %>件</h3>
+  <div class="container">
+    <% @results.each do |result| %>
+      <div class="row">
+        <div class="col-md-offset-4 col-md-4 sports-info-container">
+          <div class="row">
+            <div class="col-md-12 sports-info-container">
+              <%= result.id %>
+              <%= link_to topicid_show_path(id: result.id) do %>
+                <%= result.title %>
+              <% end %>
+              <%= result.date %>
+              <%= result.description %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

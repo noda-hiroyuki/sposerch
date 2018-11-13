@@ -16,7 +16,7 @@
           <%= @user.comment %>
         </div>
 
-        <%= link_to "削除する", user_path(current_user.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+        <%= link_to "削除する", user_path(@current_user.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
         <%= link_to users_mypage_path do %>
           <div class="events_text">戻る</div>
         <% end %>

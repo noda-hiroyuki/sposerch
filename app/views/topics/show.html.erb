@@ -4,26 +4,55 @@
       <div class="row">
         <div class="col-md-12 sports-info-container">
           <div class="events_text">イベントタイトル</div>
-          <h1 class="events_text">タイトル</h1>
-          <h1 class="events_text">タイトル</h1>
+          <h1 class="events_text"><%= @event.title %></h1>
+          <h1 class="events_text"><%= @event.event %></h1>
           <div class="events-container">
-            <%= link_to topics_show_path do %>
-              <div class="events_text">11/4</div>
+            <div class="events_text">
+              <%= simple_format(@event.description) %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 sports-info-container">
+          <div class="events_text">コメント一覧(<%= @comment_count %>)</div>
+          <div class="events-container">
+            <% if @event_comments.empty? %>
+              <p>コメントがありません</p>
+            <% else %>
+              <% @event_comments.each do |comment| %>
+                <%= comment.user_name %>
+                <p><%= comment.body %></p>
+              <% end %>
             <% end %>
           </div>
         </div>
         <div class="col-md-12 sports-info-container">
-          <div class="events_text">コメント一覧</div>
+          <div class="events_text">コメント投稿</div>
           <div class="events-container">
-            <div class="events_text">11/4</div>
+            <%= form_for @comment do |f| %>
+              <div class="form-group">
+                <%= f.label :コメント入力 %>
+                <%= f.text_area :body, class: 'form-control' %>
+              </div>
+              <%= f.hidden_field :event_id, :value => params[:id] %>
+              <%= f.submit "投稿", class: 'btn-block btn-black' %>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
     <div class="col-md-offset-1 col-md-2 sports-info-container">
       <div class="events-container">
-        <%= link_to datasels_index_path do %>
         <h1 class="events_text">関連イベント</h1>
+        <% view = 1 %>
+        <% @relates.each do |relate| %>
+          <% if view != 6 %>
+            <%= relate.date.year %>年<%= relate.date.month %>月<%= relate.date.day %>日
+            <%= link_to topicid_show_path(id: relate.id) do %>
+              <p><%= relate.title %></p>
+              <% end %>
+          <% else %>
+          <% end %>
+          <% view += 1 %>
         <% end %>
       </div>
     </div>

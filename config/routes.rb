@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'datasels/index'
+  get 'datasels/search'
   get 'datasels/show'
   get 'sessions/new'
   get 'users/new'
@@ -11,10 +11,15 @@ Rails.application.routes.draw do
   root 'events#index'
 
   resources :users
+  resources :comments
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
   post '/users/edit', to: 'users#update'
+
+  get 'topic/show/:id', to: 'topics#show',as: 'topicid_show'
+
+  post '/comments', to: 'comments#create'
 end

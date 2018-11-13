@@ -5,21 +5,30 @@
     <div class="col-md-8 sports-info-container">
       <div class="row">
         <div class="col-md-12 sports-info-container">
-          <div class="events_text">イベントタイトル</div>
-          <h1 class="events_text">タイトル</h1>
-          <h1 class="events_text">タイトル</h1>
-          <div class="events-container">
-            <%= link_to topics_show_path do %>
-              <div class="events_text">11/4</div>
+          <h1 class="events_text">スポーツイベント</h1>
+          <div class="row">
+            <% @event_now.each do |event| %>
+              <div class="col-md-2 sports-info-container">
+                <div class="events_text">
+                  <%= link_to topicid_show_path(id: event.id) do %>
+                    <%= event.date.year %>年<%= event.date.month %>月<%= event.date.day %>日
+                    <p><%= event.title %></p>
+                  <% end %>
+                </div>
+              </div>
             <% end %>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-md-12 sports-info-container">
           <div class="events_text">スポーツの仕事</div>
           <div class="events-container">
             <div class="events_text">11/4</div>
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-md-12 sports-info-container">
           <div class="events_text">いろんなスポーツの紹介</div>
           <div class="events-container">
@@ -30,8 +39,8 @@
     </div>
     <div class="col-md-offset-1 col-md-2 sports-info-container">
       <div class="events-container">
-        <%= link_to datasels_index_path do %>
-        <h1 class="events_text">詳細検索</h1>
+        <%= link_to datasels_search_path do %>
+          <h1 class="events_text">詳細検索</h1>
         <% end %>
       </div>
       <div class="events-container">

@@ -18,17 +18,14 @@ class SessionsController < ApplicationController
     redirect_to root_url, info: 'ログアウトしました'
   end
 
-  private
   def log_in(user)
     session[:user_id] = user.id
   end
 
-  private
   def email_params
     params.require(:session).permit(:email)
   end
 
-  private
   def password_params
     params.require(:session).permit(:password)
   end

@@ -1,3 +1,7 @@
+<head>
+  <%= include_gon %>
+</head>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6 sports-info-container">
@@ -32,7 +36,26 @@
     <div class="col-md-6 sports-info-container">
       <div class="events_text">イベント日程</div>
       <div class="events-container">
+        <div id="calendar"></div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+  $('#calendar').fullCalendar({
+    header: {
+      left: 'prev, next, today',
+      center: 'title',
+        ight: 'month, agendaWeek, agendaDay, listMonth',
+    },
+    events: [
+      {
+        title  : 'title',
+        start  : '2018-11-11'
+      },
+    ]
+  });
+})
+</script>

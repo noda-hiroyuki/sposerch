@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   def mypage
     #ログインユーザー情報の取得
     @user = User.find(current_user.id)
+
+    gon.event_data = Event.all
+    #binding.pry
   end
 
   def edit
