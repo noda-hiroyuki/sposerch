@@ -43,19 +43,20 @@
 </div>
 
 <script>
-$(document).ready(function(){
-  $('#calendar').fullCalendar({
-    header: {
-      left: 'prev, next, today',
-      center: 'title',
-        ight: 'month, agendaWeek, agendaDay, listMonth',
-    },
-    events: [
-      {
-        title  : 'title',
-        start  : '2018-11-11'
+  var events = [];
+  for (var i in gon.event_data) {
+    events.push({title: gon.event_data[i].title, start: gon.event_data[i].date+"T12:30",
+                 url: 'http://localhost:3000/topic/show/'+gon.event_data[i].id})
+  }
+
+  $(document).ready(function(){
+    $('#calendar').fullCalendar({
+      header: {
+        left: 'prev, next, today',
+        center: 'title',
+        right: 'month, agendaWeek, agendaDay, listMonth',
       },
-    ]
+        events: events
+    })
   });
-})
 </script>

@@ -11,6 +11,17 @@
               <%= simple_format(@event.description) %>
             </div>
           </div>
+          <div class="events-container">
+            <% if !@event.entry_users.include?(current_user) %>
+              <%= link_to entrys_path(event_id: @event.id), method: :post do %>
+                <div class="events_text">登録</div>
+              <% end %>
+            <% else %>
+              <%= link_to entrys_path(event_id: @event.id), method: :delete do %>
+                <div class="events_text">解除</div>
+              <% end %>
+            <% end %>
+          </div>
         </div>
         <div class="col-md-12 sports-info-container">
           <div class="events_text">コメント一覧(<%= @comment_count %>)</div>

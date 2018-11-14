@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   get 'topic/show/:id', to: 'topics#show',as: 'topicid_show'
 
   post '/comments', to: 'comments#create'
+
+  post '/entrys', to: 'entrys#create'
+  delete '/entrys', to: 'entrys#destroy'
 end
