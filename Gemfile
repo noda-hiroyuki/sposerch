@@ -75,3 +75,5 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 #gem 'jquery-turbolinks'
 gem 'gon'
+
+gem 'bxslider-rails'

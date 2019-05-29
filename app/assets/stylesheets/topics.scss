@@ -1,3 +1,148 @@
-// Place all the styles related to the topics controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.topic-info-container{
+  margin-top: 80px;
+  padding-top: 20px;
+
+  .topic-container{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    margin-left: 60px;
+    background-color: #FFFFFF;
+    border: 4px double #565656;
+
+    h1{
+      font-size: 30px;
+      padding-left: 20px;
+    }
+
+    h2{
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .event-info-container{
+      padding: 10px 20px 10px 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left: 60px;
+      margin-right: 60px;
+      background-color: #FFFFFF;
+    }
+
+    .topic-text{
+      font-size: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .btn{
+      border: 1px solid #565656;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .comment-container{
+      padding: 10px 10px 10px 10px;
+      background-color: #FFFFFF;
+
+      .comment-page-text{
+        font-size: 20px;
+      }
+    }
+  }
+
+  .topic_text{
+    font-size:  15px;
+    color: #565656;
+  }
+}
+
+.right-info-wrapper{
+  margin-top: 100px;
+  margin-bottom: 20px;
+  padding-left: 50px;
+
+  .info-container{
+    margin-bottom: 20px;
+    padding: 10px 20px 10px 20px;
+    background-color: #FFFFFF;
+    border: 4px double #565656;
+
+    h2{
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .related_text{
+      font-size:  10px;
+      color: #565656;
+    }
+  }
+}
+
+.topic-comments-container{
+  margin-top: 100px;
+  margin-bottom: 20px;
+  padding: 20px 20px 20px 20px;
+  background-color: #FFFFFF;
+  border: 4px double #565656;
+
+  h1{
+    font-size: 30px;
+  }
+
+  .commentbox-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+
+    .comment-count-text{
+      font-size: 25px;
+    }
+  }
+
+  .user-comment-container{
+    padding-top: 20px;
+    border-top: 1px solid #808080;
+  }
+
+
+  .btn{
+    border: 1px solid #C0C0C0;
+    background-color: #FFFFFF;
+    text-align: center;
+    color: #000000;
+    font-size: 15px;
+  }
+}
+
+.rightbar-container{
+  margin-top: 100px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+
+  .right-comment-container{
+    margin-left: 30px;
+    margin-bottom: 20px;
+    padding: 20px 20px 20px 20px;
+    background-color: #FFFFFF;
+
+    .rightbar-text{
+      margin-top: 10px;
+      font-size: 17px;
+      border-bottom: 1px solid #808080;
+    }
+
+    h2{
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}
+
+.submit-group{
+  padding-left: 350px;
+  padding-right: 350px;
+  padding-bottom: 20px;
+}

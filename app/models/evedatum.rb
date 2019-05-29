@@ -1,2 +1,0 @@
-class Evedatum < ApplicationRecord
-end

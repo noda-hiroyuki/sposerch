@@ -1,0 +1,35 @@
+body{
+  background-color: #EEEEEE;
+}
+
+h1{
+  font-size: 40px;
+  font-weight: bold;
+}
+
+h2{
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.text-red{
+   color: #E20B0B;
+}
+
+.background-wrapper{
+  width: 100vw;
+  height: 100vh;
+  background-color: #EEEEEE;
+}
+
+.menuTabDoubleLight{
+  width: 20%;
+	padding: 2px 8px;
+	border-width: 0 5px;
+	border-color: #000000;
+	border-style: solid;
+	background: #E5E5E5;
+	line-height: 140%;
+	font-size: 20px;
+	text-align: center;
+}

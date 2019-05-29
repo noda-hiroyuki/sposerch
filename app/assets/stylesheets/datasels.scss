@@ -1,3 +1,154 @@
-// Place all the styles related to the datasels controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.search-container {
+  margin-top: 40px;
+  padding-top: 20px;
+
+  .kind-container{
+    margin: 20px 20px 20px 20px;
+    background-color: #FFFFFF;
+    border: 4px double #565656;
+
+    .datasels-container{
+      padding-top: 10px;
+      border: 1px solid #565656;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .datasels_title{
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 100px;
+    color: #000000;
+  }
+
+  .datasels_content{
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .form-group{
+    margin-bottom: 10px;
+
+    .btn{
+      border: 1px solid #565656;
+      padding: 15px 30px 15px 30px;
+      margin-left: 10px;
+      color: #000000;
+    }
+
+    input[type="text"] {
+        width: 340px;
+        height: 50px;
+        font-size: 25px;
+        padding-top: 3px;
+        padding-bottom: 10px;
+    }
+  }
+
+  input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+  }
+
+  input[type="date"]{
+    width: 180px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+
+  select{
+    font-size: 18px;
+    color: #000000;
+  }
+
+  label{
+    font-size: 15px;
+    color: #000000;
+  }
+
+  .submit-container{
+    padding-top: 10px;
+    margin-bottom: 20px;
+  }
+
+
+  .btn-block {
+    color: #565656;
+    border: 1px solid #565656;
+    border-radius: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    background-color: rgba(0,0,0,0.0);
+  }
+}
+
+.search-results-contaniner{
+  margin-top: 60px;
+  padding-top: 60px;
+
+  .result-show-container{
+    padding: 20px 40px 20px 40px;
+    background-color: #FFFFFF;
+    border: 4px double #565656;
+
+    .pagecount-text{
+      font-size: 20px;
+    }
+
+    .show-container{
+      border-top: 1.5px solid #808080;
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+      img{
+        width: 100%;
+        height: 100%;
+      }
+
+      .point-container{
+        width: 25%;
+        border-bottom: 4px double #FF0400;
+        font-size: 20px;
+        color: #FF0400;
+      	text-align: center;
+      }
+
+      .event-title{
+        font-size: 25px;
+      }
+
+      .event-info-text{
+        padding: 10px 10px 10px 10px;
+        font-size: 20px;
+      }
+    }
+
+    .page-container{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 15px 15px 15px 15px;
+
+      .btn{
+        border: 1px solid #C0C0C0;
+        background-color: #FFFFFF;
+        text-align: center;
+        color: #000000;
+      }
+
+      .page-text{
+          font-size: 18px;
+      }
+
+      .count-text{
+        font-size: 18px;
+        padding-top: 10px;
+        padding-left: 10px;
+      }
+    }
+  }
+}

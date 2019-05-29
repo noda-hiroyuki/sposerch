@@ -1,26 +1,44 @@
-<div class="users-new-container">
-  <div class="container">
+<div class="user-erase-container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-offset-4 col-md-4 sports-info-container">
-        <h1 class="text-center text-white">会員削除</h1>
-        <div class="events_text">ユーザー名：
-          <%= @user.name %>
-        </div>
-        <div class="events_text">メールアドレス：
-          <%= @user.email %>
-        </div>
-        <div class="events_text">好きなスポーツ：
-          <%= @user.splike %>
-        </div>
-        <div class="events_text">コメント：
-          <%= @user.comment %>
-        </div>
+      <div class="col-md-offset-3 col-md-6 user-info-contaniner">
+        <div class="row">
+          <div class="col-md-12 user-title-container">
+            <h1 class="text-center">会員退会手続き</h1>
+          </div>
+          <div class="col-md-12 user-title-container">
+            <div class="user-info-text">
+              お客様の会員情報は下記の通りです。退会する場合は、退会をクリックしてください。
+            </div>
+            <div class="user-info-text text-center">
+              <font color="red">退会されますと、登録したイベント情報は取得できなくなります。</font>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="user-info-text">ユーザー名：
+              <%= @user.name %>
+            </div>
+            <div class="user-info-text">メールアドレス：
+              <%= @user.email %>
+            </div>
+            <div class="user-info-text">好きなスポーツ：
+              <%= @user.splike %>
+            </div>
+            <div class="user-info-text">コメント：
+              <%= @user.comment %>
+            </div>
 
-        <%= link_to "削除する", user_path(@current_user.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
-        <%= link_to users_mypage_path do %>
-          <div class="events_text">戻る</div>
-        <% end %>
+            <div class="text-center user-info-text">
+              <%= link_to user_path(@current_user.id), method: :delete, data: {confirm: "本当に削除しますか？"} do %>
+                <button type="submit" class="btn">退会</button>
+              <% end %>
+            </div>
+            <%= link_to users_mypage_path do %>
+              <div class="user-info-text">マイページに戻る</div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
+  </div>
 </div>

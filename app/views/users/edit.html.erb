@@ -1,36 +1,31 @@
-<div class="users-new-container">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-offset-4 col-md-4">
-        <h1 class="text-center text-white">ユーザー情報変更</h1>
-        <%= form_for @user do |f| %>
-          <div class="form-group">
-            <%= f.label :ユーザー名, class: 'text-black' %>
-            <%= f.text_field :name, class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <%= f.label :画像 %>
-            <%= f.file_field :image%>
-          </div>
-          <div class="form-group">
-            <%= f.label :email, class: 'text-black' %>
-            <%= f.text_field :email, class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <%= f.label :好きなスポーツ, class: 'text-black' %>
-            <%= f.text_field :splike, class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <%= f.label :コメント, class: 'text-black' %>
-            <%= f.text_field :comment, class: 'form-control' %>
-          </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-offset-4 col-md-4 user-edit-container">
+      <h1 class="text-center">ユーザー情報変更</h1>
+      <%= form_for @user do |f| %>
+        <div class="form-group">
+          <%= f.label :ユーザー名 %>
+          <%= f.text_field :name, class: 'form-control', :placeholder => 'ユーザー名を入力' %>
 
-          <%= f.submit "保存", class: 'btn-block btn-white' %>
-          <% end %>
+          <%= f.label :画像 %>
+          <%= f.file_field :image%>
+
+          <%= f.label :email %>
+          <%= f.text_field :email, class: 'form-control', :placeholder => 'メールアドレス入力' %>
+
+          <%= f.label :好きなスポーツ %>
+          <%= f.text_field :splike, class: 'form-control', :placeholder => '好きなスポーツを入力' %>
+
+          <%= f.label :コメント %>
+          <%= f.text_field :comment, class: 'form-control', :placeholder => 'コメントを入力' %>
+
+          <%= f.submit "保存", class: 'btn-block' %>
+
           <%= link_to users_mypage_path do %>
-            <div class="events_text">戻る</div>
+            <div class="user-edit-text">マイページに戻る</div>
           <% end %>
         </div>
-      </div>
+      <% end %>
     </div>
+  </div>
 </div>

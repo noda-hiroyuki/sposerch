@@ -1,50 +1,117 @@
-<h1>スポサチ</h1>
-<h2>スポーツイベント</h2>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 sports-info-container">
+    <div class="col-md-12 sports-wrapper">
       <div class="row">
-        <div class="col-md-12 sports-info-container">
-          <h1 class="events_text">スポーツイベント</h1>
-          <div class="row">
-            <% @event_now.each do |event| %>
-              <div class="col-md-2 sports-info-container">
-                <div class="events_text">
-                  <%= link_to topicid_show_path(id: event.id) do %>
-                    <%= event.date.year %>年<%= event.date.month %>月<%= event.date.day %>日
-                    <p><%= event.title %></p>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 sports-info-container">
-          <div class="events_text">スポーツの仕事</div>
-          <div class="events-container">
-            <div class="events_text">11/4</div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 sports-info-container">
-          <div class="events_text">いろんなスポーツの紹介</div>
-          <div class="events-container">
-            <div class="events_text">11/4</div>
-          </div>
-        </div>
+        <ul id="top_slider">
+            <li><img src="/assets/baseball.jpg"></li>
+            <li><img src="/assets/ouen.jpg" ></li>
+        </ul>
       </div>
     </div>
-    <div class="col-md-offset-1 col-md-2 sports-info-container">
-      <div class="events-container">
-        <%= link_to datasels_search_path do %>
-          <h1 class="events_text">詳細検索</h1>
-        <% end %>
+    <div class="col-md-8 sports-info-container">
+      <div class="row">
+        <div class="col-md-11 events-container">
+          <h1>スポーツイベント</h1>
+            <ul id="slider">
+              <% @event_now.each do |event| %>
+                <li>
+                  <div class="events_text">
+                    <% sport = Sport.find_by(sport_num: event.num) %>
+                    <%= link_to topic_show_path(id: event.id) do %>
+                      <%= image_tag sport.image.url %>
+                      <%= event.date.year %>年<%= event.date.month %>月<%= event.date.day %>日
+                      <p><%= event.title %></p>
+                    <% end %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+        </div>
       </div>
-      <div class="events-container">
-        <h1 class="events_text">閲覧履歴</h1>
+      <div class="row">
+        <div class="col-md-11 events-container">
+          <h1>スポーツの仕事</h1>
+          <div class="events_text">仕事求人及び会社を記載</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-11 events-container">
+          <h1>いろんなスポーツ・団体の紹介</h1>
+          <div class="events_text">マイナースポーツ・団体を記載</div>
+        </div>
+      </div>
+      <% if @comment_new != nil %>
+        <div class="row">
+          <div class="col-md-11 events-container">
+            <h1>新着コメント</h1>
+            <div class="row row-center">
+              <% @comment_new.each do |comment| %>
+                <% event = Event.find(comment.event_id) %>
+                <div class="col-lg-2 col-md-3 col-sm-4 col-xs-5">
+                  <% if !User.find_by(id: comment.user_id).nil? %>
+                    <% user = User.find_by(id: comment.user_id) %>
+                    <% if user.image.url != nil %>
+                      <%= image_tag user.image.url,class:"img-responsive img-circle reviews" %>
+                    <% else %>
+                      <%= image_tag "/assets/noimage.jpg",class:"img-responsive img-circle reviews" %>
+                    <% end %>
+                    <strong><%= user.name %></strong>
+                  <% else %>
+                    <%= image_tag "/assets/noimage.jpg",class:"img-responsive img-circle reviews" %>
+                    <strong>退会ユーザー</strong>
+                  <% end %>
+                </div>
+                <div class="col-lg-10 col-md-9 col-sm-8 col-xs-7">
+                  <div class="popover right show" style="position:relative; top=-90px; left=100px; max-width:100%; display:inline;">
+                    <div class="arrow"></div>
+                    <%= link_to topic_show_path(id: event.id) do %>
+                    <h3 class="popover-title">
+                      <%= event.title %>  (<%= time_ago_in_words(comment.created_at)+"前" %>)
+                    </h3>
+                    <% end %>
+                    <div class="popover-content">
+                      <p><%= comment.body %></p>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-2 right-wrapper">
+      <div class="row">
+        <% if @event_entry_ranking != [] %>
+          <div class="col-md-12 right-info-container">
+            <h1>イベント登録ランキング</h1>
+            <% rank = 1 %>
+            <div class="right-info-text">
+              <% @event_entry_ranking.each do |ranking| %>
+                第<%= rank %>位
+                <%= link_to topic_show_path(id: ranking.id) do %>
+                  <p><%= ranking.title %></p>
+                <% end %>
+                <% rank += 1 %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <% if cookies[:recently_viewed_event] != nil %>
+          <div class="col-md-12 right-info-container">
+            <h1>閲覧履歴</h1>
+            <% events = cookies[:recently_viewed_event].split(",") unless cookies[:recently_viewed_event].nil? %>
+            <div class="right-info-text">
+              <% events.reverse_each do |id| %>
+                <% event = Event.find(id) %>
+                <%= link_to topic_show_path(id: id) do %>
+                  <%= event.date.year %>年<%= event.date.month %>月<%= event.date.day %>日
+                  <p><%= event.title %></p>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,71 +1,152 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8 sports-info-container">
+    <div class="col-md-8 topic-info-container">
       <div class="row">
-        <div class="col-md-12 sports-info-container">
-          <div class="events_text">イベントタイトル</div>
-          <h1 class="events_text"><%= @event.title %></h1>
-          <h1 class="events_text"><%= @event.event %></h1>
-          <div class="events-container">
-            <div class="events_text">
+        <div class="col-md-12 topic-container">
+          <h1 class="text-center"><%= @event.title %></h1>
+          <div class="event-info-container">
+            <div class="menuTabDoubleLight">日時</div>
+            <div class="topic-text">
+                <%= @event.date.year %>年<%= @event.date.month %>月<%= @event.date.day %>日　
+                <%= @event.start %>　〜　<%= @event.end %>
+            </div>
+            <div class="menuTabDoubleLight">イベント情報</div>
+            <div class="topic-text">
               <%= simple_format(@event.description) %>
             </div>
+            <div class="menuTabDoubleLight">注目ポイント！！</div>
+            <div class="topic-text">
+              <%= simple_format(@event.point) %>
+            </div>
+            <div class="menuTabDoubleLight">URL</div>
           </div>
-          <div class="events-container">
-            <% if !@event.entry_users.include?(current_user) %>
-              <%= link_to entrys_path(event_id: @event.id), method: :post do %>
-                <div class="events_text">登録</div>
-              <% end %>
-            <% else %>
-              <%= link_to entrys_path(event_id: @event.id), method: :delete do %>
-                <div class="events_text">解除</div>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-        <div class="col-md-12 sports-info-container">
-          <div class="events_text">コメント一覧(<%= @comment_count %>)</div>
-          <div class="events-container">
-            <% if @event_comments.empty? %>
-              <p>コメントがありません</p>
-            <% else %>
-              <% @event_comments.each do |comment| %>
-                <%= comment.user_name %>
-                <p><%= comment.body %></p>
+          <div class="col-md-3">
+            <% if logged_in? %>
+              <% if !@event.entry_users.include?(current_user) %>
+                <%= link_to entrys_path(event_id: @event.id), method: :post do %>
+                  <button type="submit" class="btn" style="background-color: #FFFFFF; color: #000000">登録(<%= @entry_counts %>人登録)</button>
+                <% end %>
+              <% else %>
+                <%= link_to entrys_path(event_id: @event.id), method: :delete do %>
+                  <button type="submit" class="btn" style="background-color: #000000; color: #FFFFFF">解除(<%= @entry_counts %>人登録)</button>
+                <% end %>
               <% end %>
             <% end %>
           </div>
         </div>
-        <div class="col-md-12 sports-info-container">
-          <div class="events_text">コメント投稿</div>
-          <div class="events-container">
-            <%= form_for @comment do |f| %>
-              <div class="form-group">
-                <%= f.label :コメント入力 %>
-                <%= f.text_area :body, class: 'form-control' %>
+        <div class="col-md-12 topic-container">
+          <h2>コメント一覧(<%= @comment_count %>)</h2>
+          <div class="comment-container">
+            <div class="row row-center">
+              <% if @event_comments.empty? %>
+                <div class="topic-text text-center">
+                  コメントがありません
+                </div>
+              <% else %>
+                <% @event_comments.each do |comment| %>
+                  <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+                    <% if !User.find_by(id: comment.user_id).nil? %>
+                      <% user = User.find_by(id: comment.user_id) %>
+                      <% if user.image.url != nil %>
+                        <%= image_tag user.image.url,class:"img-responsive img-circle reviews" %>
+                      <% else %>
+                        <%= image_tag "/assets/noimage.jpg",class:"img-responsive img-circle reviews" %>
+                      <% end %>
+                      <% username = user.name %>
+                    <% else %>
+                      <%= image_tag "/assets/noimage.jpg",class:"img-responsive img-circle reviews" %>
+                      <% username = "退会ユーザー" %>
+                    <% end %>
+                  </div>
+                  <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                    <div class="popover right show" style="position:relative; top=-90px; left=100px; max-width:100%; display:inline;">
+                      <div class="arrow"></div>
+                      <h3 class="popover-title">
+                        <%= username %>　|　<%= time_ago_in_words(comment.created_at)+"前" %>
+                      </h3>
+                      <div class="popover-content">
+                        <p><%= comment.body %></p>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+                <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                  <%= link_to topic_comment_path(id: params[:id]) do %>
+                    <div class="text-center comment-page-text">全てのコメントを読む</div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 topic-container">
+          <h2>コメント投稿</h2>
+            <% if logged_in? %>
+              <%= form_for @comment, :url => { :controller => :comments, :action => :comment_new } do |f| %>
+                <div class="form-group">
+                  <%= f.label :コメント入力 %>
+                  <%= f.text_area :body, class: 'form-control',:size => "1x5" %>
+                </div>
+                <%= f.hidden_field :event_id, :value => params[:id] %>
+                <div class="submit-group">
+                  <%= f.submit "投稿", class: 'btn-block' %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="topic-text text-center">
+                ログインしないとコメントはできません
               </div>
-              <%= f.hidden_field :event_id, :value => params[:id] %>
-              <%= f.submit "投稿", class: 'btn-block btn-black' %>
             <% end %>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-offset-1 col-md-2 sports-info-container">
-      <div class="events-container">
-        <h1 class="events_text">関連イベント</h1>
-        <% view = 1 %>
-        <% @relates.each do |relate| %>
-          <% if view != 6 %>
-            <%= relate.date.year %>年<%= relate.date.month %>月<%= relate.date.day %>日
-            <%= link_to topicid_show_path(id: relate.id) do %>
-              <p><%= relate.title %></p>
+
+    <div class="col-md-offset-1 col-md-2 right-info-wrapper">
+      <div class="row">
+        <% if @sameday_events != [] %>
+          <div class="col-md-12 info-container">
+            <h2>同日イベント</h2>
+            <% @sameday_events.each do |event| %>
+              <%= link_to topic_show_path(id: event.id) do %>
+                <%= event.date.year %>年<%= event.date.month %>月<%= event.date.day %>日
+                <p><%= event.title %></p>
               <% end %>
-          <% else %>
-          <% end %>
-          <% view += 1 %>
+            <% end %>
+          </div>
+        <% end %>
+        <% if @relates != [] %>
+          <div class="col-md-12 info-container">
+            <h2>関連イベント</h2>
+            <% @relates.each do |relate| %>
+              <%= link_to topic_show_path(id: relate.id) do %>
+                <%= relate.date.year %>年<%= relate.date.month %>月<%= relate.date.day %>日
+                <p><%= relate.title %></p>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+        <% if cookies[:recently_viewed_event] != nil %>
+          <div class="col-md-12 info-container">
+            <h2>閲覧履歴</h2>
+            <% events = cookies[:recently_viewed_event].split(",") unless cookies[:recently_viewed_event].nil? %>
+            <div class="relates_text">
+              <% view = 1 %>
+                <% events.reverse_each do |id| %>
+                  <% if view < 11 %>
+                    <% event = Event.find(id) %>
+                    <%= link_to topic_show_path(id: id) do %>
+                      <%= event.date.year %>年<%= event.date.month %>月<%= event.date.day %>日
+                      <p><%= event.title %></p>
+                    <% end %>
+                  <% end %>
+                  <% view += 1 %>
+                <% end %>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<%= javascript_include_tag 'recently_viewed_cookie.js' %>

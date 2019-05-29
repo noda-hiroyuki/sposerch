@@ -23,8 +23,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
+    user = User.new(user_params)
+
+    if user.save
       redirect_to login_path, success: '登録が完了しました'
     else
       flash.now[:danger] = "登録に失敗しました"
@@ -39,9 +40,42 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(current_user.id)
-    user.destroy
-    binding.pry
-    redirect_to root_path
+    if user.destroy
+      redirect_to root_path, success: '会員削除しました'
+    else
+      flash.now[:danger] = "会員削除できませんでした"
+    end
+  end
+
+  def user_info_check
+    if(params[:email] != nil)
+      emailcheck
+    end
+
+    if(params[:name] != nil)
+      namecheck
+    end
+  end
+
+
+  def emailcheck
+    if(User.find_by(email: params[:email]) == nil)
+      used_email_messeage = {'messeage' => '使用できます'}
+    else
+      used_email_messeage = {'messeage' => '使用されています'}
+    end
+
+    render :json => used_email_messeage
+  end
+
+  def namecheck
+    if(User.find_by(name: params[:name]) == nil)
+      used_name_messeage = {'messeage' => '使用できます'}
+    else
+      used_name_messeage = {'messeage' => '使用されています'}
+    end
+
+    render :json => used_name_messeage
   end
 
   private
@@ -49,7 +83,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  private
   def mypage_params
     params.require(:user).permit(:name, :email, :image, :splike, :comment)
   end

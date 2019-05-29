@@ -1,7 +1,186 @@
 .users-new-container {
-  padding-top: 220px;
+  padding-top: 200px;
+
+  h1{
+    font-size: 30px;
+  }
+
+  .users-new-text{
+    font-size: 20px;
+  }
 
   .form-group {
     margin-bottom: 20px;
+    font-size: 15px;
+
+    input[type="text"] {
+        width: 360px;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    input[type="password"] {
+        width: 360px;
+        height: 50px;
+        font-size: 25px;
+    }
+    .btn-block{
+      background-color: #000000;
+      width: 360px;
+      height: 50px;
+      text-align: center;
+      font-size: 25px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+}
+
+.users-login-container {
+  padding-top: 70px;
+
+  h1{
+    font-size: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    font-size: 15px;
+
+    input[type="text"] {
+        width: 360px;
+        height: 50px;
+        font-size: 25px;
+    }
+
+    input[type="password"] {
+        width: 360px;
+        height: 50px;
+        font-size: 25px;
+    }
+  }
+}
+
+.mypage-info-container{
+  margin-top: 24px;
+  padding: 0 50px 20px 50px;
+  background-color: #FFFFFF;
+
+  .user-container{
+    margin-top: 10px;
+    padding: 20px 20px 20px 20px;
+
+    .user-info-container{
+      border: 4px double #565656;
+      padding: 20px 20px 20px 20px;
+
+      .user-info-text{
+        font-size: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .btn{
+        background-color: #000000;
+        text-align: center;
+        color: #FFFFFF;
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      //並んでいるものを上下中央で揃える設定
+      .row-center{
+        text-align: center;
+        letter-spacing: -0.4em;
+      }
+      .row-center > [class*='col-'] {
+        display: inline-block;
+        letter-spacing: 0;
+        vertical-align: middle;
+        float: none !important;
+      }
+    }
+  }
+
+  h1{
+    font-size: 30px;
+  }
+}
+
+.user-edit-container{
+  padding-top: 180px;
+
+  h1{
+    font-size: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+
+    input[type="text"] {
+        width: 400px;
+        height: 50px;
+        margin-bottom: 10px;
+        font-size: 15px;
+    }
+
+    .btn-block{
+      background-color: #FFFFFF;
+      width: 400px;
+      height: 40px;
+      text-align: center;
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .user-edit-text{
+      padding-top: 10px;
+      padding-bottom: 10px;
+      font-size: 20px;
+    }
+  }
+}
+
+.user-erase-container{
+  padding-top: 120px;
+
+
+  .user-info-contaniner{
+    padding: 20px 40px 20px 40px;
+    border: 4px double #565656;
+    background-color: #FFFFFF;
+
+    .user-title-container{
+      padding: 20px 20px 20px 20px;
+      border-bottom: 1px solid #565656;
+    }
+
+    h1{
+      font-size: 30px;
+    }
+
+    .user-info-text{
+      font-size: 20px;
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .btn{
+      background-color: #000000;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: center;
+      color: #FFFFFF;
+      font-size: 20px;
+    }
   }
 }

@@ -1,0 +1,21 @@
+//吹き出し用の設定
+.popover.show{
+  margin-bottom: 30px;
+}
+//横の画像用の設定
+img.reviews {
+  margin-bottom: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+}
+//並んでいるものを上下中央で揃える設定
+.row-center{
+  text-align: center;
+  letter-spacing: -0.4em;
+}
+.row-center > [class*='col-'] {
+  display: inline-block;
+  letter-spacing: 0;
+  vertical-align: middle;
+  float: none !important;
+}

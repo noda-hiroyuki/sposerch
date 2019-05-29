@@ -5,8 +5,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= include_gon %>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+
   </head>
 
   <body>
@@ -17,34 +20,46 @@
     <nav class="navbar navbar-default navbar-fixed-top navbar-transparent">
       <div class="container-fluid">
         <%= link_to root_path do %>
-          <span class="navbar-title">スポサチ</span>
+          <span class="navbar-title" onmouseover="this.style.color='#0099FF'
+                      "onmouseout="this.style.color='#FFFFFF'">スポサチ</span>
         <% end %>
         <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= link_to datasels_search_path do %>
+            <span class="navbar-text" onmouseover="this.style.color='#0099FF'
+                        "onmouseout="this.style.color='#FFFFFF'">詳細検索</span>
+            <% end %>
+          </li>
           <% if logged_in? %>
           <li>
             <%= link_to users_erase_path do %>
-            <span class="navbar-text">会員削除</span>
+            <span class="navbar-text" onmouseover="this.style.color='#0099FF'
+                        "onmouseout="this.style.color='#FFFFFF'">会員削除</span>
             <% end %>
           </li>
           <li>
             <%= link_to users_mypage_path do %>
-            <span class="navbar-text">マイページ</span>
+            <span class="navbar-text" onmouseover="this.style.color='#0099FF'
+                        "onmouseout="this.style.color='#FFFFFF'">マイページ</span>
             <% end %>
           </li>
           <li>
             <%= link_to logout_path, method: :delete do %>
-            <span class="navbar-text">ログアウト</span>
+            <span class="navbar-text"onmouseover="this.style.color='#0099FF'
+                        "onmouseout="this.style.color='#FFFFFF'">ログアウト</span>
             <% end %>
           </li>
           <% else %>
           <li>
             <%= link_to users_new_path do %>
-            <span class="navbar-text">会員登録</span>
+            <span class="navbar-text" onmouseover="this.style.color='#0099FF'
+                        "onmouseout="this.style.color='#FFFFFF'">会員登録</span>
             <% end %>
           </li>
           <li>
             <%= link_to login_path do %>
-            <span class="navbar-text">ログイン</span>
+            <span class="navbar-text" onmouseover="this.style.color='#0099FF'
+                        "onmouseout="this.style.color='#FFFFFF'">ログイン</span>
             <% end %>
           </li>
           <% end %>

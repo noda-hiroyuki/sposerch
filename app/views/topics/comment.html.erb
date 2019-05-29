@@ -1,0 +1,131 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6 topic-comments-container">
+      <%= link_to topic_show_path(id: params[:id]) do %>
+        <h1 class="text-center"><%= @event_title %></h1>
+      <% end %>
+      <div class="row row-center">
+        <div class="col-md-12 commentbox-container">
+          <span class="far fa-comment fa-2x"></span>
+          <span class="comment-count-text"><%= @count %></span>
+          <% if logged_in? %>
+            <%= form_for @comment, :url => { :controller => :comments, :action => :comment_list } do |f| %>
+              <div class="form-group">
+                <%= f.label :コメント入力 %>
+                <%= f.text_area :body, class: 'form-control',:size => "1x5" %>
+              </div>
+              <%= f.hidden_field :event_id, :value => params[:id] %>
+              <div class="submit-group">
+                <%= f.submit "投稿", class: 'btn-block' %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <% @comment_all.each do |comment| %>
+          <div class="col-md-12 user-comment-container">
+            <div class="row row-center">
+              <div class="col-lg-1 col-md-2 col-sm-3 col-xs-4">
+                <% if !User.find_by(id: comment.user_id).nil? %>
+                  <% user = User.find_by(id: comment.user_id) %>
+                  <% if user.image.url != nil %>
+                    <%= image_tag user.image.url,class:"img-responsive img-circle reviews" %>
+                  <% else %>
+                    <%= image_tag "/assets/noimage.jpg",class:"img-responsive img-circle reviews" %>
+                  <% end %>
+                  <% username = user.name %>
+                <% else %>
+                  <%= image_tag "/assets/noimage.jpg",class:"img-responsive img-circle reviews" %>
+                  <% username = "退会ユーザー" %>
+                <% end %>
+              </div>
+              <div class="col-lg-11 col-md-10 col-sm-9 col-xs-8">
+                <div class="popover right show" style="position:relative; top=-90px; left=100px; max-width:100%; display:inline;">
+                  <div class="arrow"></div>
+                  <h3 class="popover-title">
+                    <%= username %>　|　<%= time_ago_in_words(comment.created_at)+"前" %>
+                  </h3>
+                  <div class="popover-content">
+                    <p><%= comment.body %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="col-md-12">
+          <div style="display:inline-flex">
+            <% if @page != 1 %>
+              <%= link_to topic_comment_path(id: params[:id], page: 1) do %>
+              <button type="submit" class="btn" onmouseover="this.style.backgroundColor='#000000'; this.style.color='#FFFFFF'"
+                                                onmouseout="this.style.backgroundColor='#FFFFFF'; this.style.color='#000000'">
+                  <div class="page-text"> 最初<< </div>
+                </button>
+              <% end %>
+            <% else %>
+              <button type="submit" class="btn" style="background-color: #808080; color: #FFFFFF" disabled>
+                <div class="page-text"> 最初<< </div>
+              </button>
+            <% end %>
+            <% while @start_page <= @end_page %>
+              <% if @start_page != @page %>
+                <%= link_to topic_comment_path(id: params[:id], page: @start_page) do %>
+                  <button type="submit" class="btn" onmouseover="this.style.backgroundColor='#000000'; this.style.color='#FFFFFF'"
+                                                    onmouseout="this.style.backgroundColor='#FFFFFF'; this.style.color='#000000'">
+                    <div class="page-text"> <%= @start_page %> </div>
+                  </button>
+                <% end %>
+              <% else %>
+                <button type="submit" class="btn" style="background-color: #000000; color: #FFFFFF" disabled>
+                  <div class="page-text"> <%= @start_page %> </div>
+                </button>
+              <% end %>
+              <% @start_page += 1 %>
+            <% end %>
+            <% if @page != @page_counts %>
+              <%= link_to topic_comment_path(id: params[:id], page: @page_counts) do %>
+              <button type="submit" class="btn" onmouseover="this.style.backgroundColor='#000000'; this.style.color='#FFFFFF'"
+                                                onmouseout="this.style.backgroundColor='#FFFFFF'; this.style.color='#000000'">
+                  <div class="page-text"> >>最後 </div>
+                </button>
+              <% end %>
+            <% else %>
+              <button type="submit" class="btn" style="background-color: #808080; color: #FFFFFF" disabled>
+                <div class="page-text"> >>最後 </div>
+              </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 rightbar-container">
+      <div class="row row-center">
+        <div class="col-md-12 right-comment-container">
+          <h2>新着コメント</h2>
+          <% @event_id.each do |id| %>
+            <% event = Event.find_by(id: id) %>
+            <div class="col-md-12 rightbar-text">
+              <%= link_to topic_comment_path(id: id) do %>
+                <p><%= event.title %></p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-12 right-comment-container">
+          <h2>コメント投稿ランキング</h2>
+          <% rank = 1 %>
+          <% key = 0 %>
+          <% @event_comment_ranking.each do |ranking| %>
+            <div class="col-md-12 rightbar-text">
+              第<%= rank %>位　<%= @event_commment_counts[key] %>件
+              <%= link_to topic_comment_path(id: ranking.id) do %>
+                <p><%= ranking.title %></p>
+              <% end %>
+            </div>
+            <% rank += 1 %>
+            <% key += 1 %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

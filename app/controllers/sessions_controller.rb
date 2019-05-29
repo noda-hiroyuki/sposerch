@@ -18,8 +18,14 @@ class SessionsController < ApplicationController
     redirect_to root_url, info: 'ログアウトしました'
   end
 
+  private
   def log_in(user)
     session[:user_id] = user.id
+  end
+
+  def log_out
+    session.delete(:user_id)
+    @current_user = nil
   end
 
   def email_params
@@ -28,10 +34,5 @@ class SessionsController < ApplicationController
 
   def password_params
     params.require(:session).permit(:password)
-  end
-
-  def log_out
-    session.delete(:user_id)
-    @current_user = nil
   end
 end

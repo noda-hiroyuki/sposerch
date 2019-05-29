@@ -1,62 +1,47 @@
-<head>
-  <%= include_gon %>
-</head>
-
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6 sports-info-container">
-      <div class="events_text">ユーザー情報</div>
-      <div class="events-container">
-        <div class="events_text">ユーザー名：
-          <%= @user.name %>
-        </div>
-        <% if @user.image.url != nil %>
-          <div class="events_text">画像：
-            <%= image_tag @user.image.url %>
+    <div class="col-md-12 mypage-info-container">
+      <div class="row">
+        <div class="col-md-5 user-container">
+          <h1>ユーザー情報</h1>
+          <div class="user-info-container">
+            <div class="row row-center">
+              <div class="col-md-12">
+                <% if @user.image.url != nil %>
+                  <%= image_tag @user.image.url, :size => "300x215" %>
+                <% else %>
+                  <%= image_tag 'noimage.jpg', :size => "300x215" %>
+                <% end %>
+              </div>
+            </div>
+            <div class="user-info-text">ユーザー名：
+              <%= @user.name %>
+            </div>
+            <div class="user-info-text">メールアドレス：
+              <%= @user.email %>
+            </div>
+            <div class="user-info-text">好きなスポーツ：
+              <%= @user.splike %>
+            </div>
+            <div class="user-info-text">コメント：
+              <%= @user.comment %>
+            </div>
+            <div class="row row-center">
+              <div class="col-md-12">
+                <%= link_to users_edit_path do %>
+                  <button type="submit" class="btn">編集</button>
+                <% end %>
+              </div>
+            </div>
           </div>
-        <% else %>
-          <div class="events_text">画像：
-            <%= image_tag 'noimage.svg' %>
-          </div>
-        <% end %>
-        <div class="events_text">メールアドレス：
-          <%= @user.email %>
         </div>
-        <div class="events_text">好きなスポーツ：
-          <%= @user.splike %>
+        <div class="col-md-7 calendar-container">
+          <h1>イベント日程</h1>
+          <div id="calendar"></div>
         </div>
-        <div class="events_text">コメント：
-          <%= @user.comment %>
-        </div>
-        <%= link_to users_edit_path do %>
-          <div class="events_text">編集</div>
-        <% end %>
-      </div>
-    </div>
-    <div class="col-md-6 sports-info-container">
-      <div class="events_text">イベント日程</div>
-      <div class="events-container">
-        <div id="calendar"></div>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-  var events = [];
-  for (var i in gon.event_data) {
-    events.push({title: gon.event_data[i].title, start: gon.event_data[i].date+"T12:30",
-                 url: 'http://localhost:3000/topic/show/'+gon.event_data[i].id})
-  }
-
-  $(document).ready(function(){
-    $('#calendar').fullCalendar({
-      header: {
-        left: 'prev, next, today',
-        center: 'title',
-        right: 'month, agendaWeek, agendaDay, listMonth',
-      },
-        events: events
-    })
-  });
-</script>
+<%= javascript_include_tag 'calender.js' %>

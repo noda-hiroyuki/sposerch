@@ -1,0 +1,89 @@
+<div class="search-results-contaniner">
+  <h1 class="text-center">検索結果</h1>
+  <h2 class="text-center">スポーツイベント<%= @count %>件</h2>
+  <% if @page_counts != 0  %>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-offset-3 col-md-6 result-show-container">
+          <div class="pagecount-text"><%= 1+(@page-1)*1 %> ~ <%= @page*1 %>件表示/全<%= @count %>件</div>
+          <% @results.each do |result| %>
+            <div class="row">
+              <div class="col-md-12 show-container">
+                <div class="event-title">
+                  <%= link_to topic_show_path(id: result.id) do %>
+                    <%= result.title %>
+                  <% end %>
+                </div>
+                <div class="event-info-text">
+                  日時：<%= result.date.year %>年<%= result.date.month %>月<%= result.date.day %>日　
+                       <%= result.start %>　〜　<%= result.end %>
+                </div>
+                <div class="row">
+                  <div class="col-md-4">
+                    <% sport = Sport.find_by(sport_num: result.num) %>
+                    <%= image_tag sport.image.url %>
+                  </div>
+                  <div class="col-md-8">
+                    <div class="point-container">ポイント！</div>
+                    <div class="event-info-text">
+                      <%= simple_format(result.point) %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-md-12 page-container">
+              <div class="row row-center">
+                <div class="col-md-12">
+                  <div style="display:inline-flex">
+                    <% if @page != 1 %>
+                      <%= link_to datasels_keyword_path(keyword: @keyword, page: 1), method: :post do %>
+                        <button type="submit" class="btn" onmouseover="this.style.backgroundColor='#000000'; this.style.color='#FFFFFF'"
+                                                          onmouseout="this.style.backgroundColor='#FFFFFF'; this.style.color='#000000'">
+                          <div class="page-text"> 最初<< </div>
+                        </button>
+                      <% end %>
+                    <% else %>
+                      <button type="submit" class="btn" style="background-color: #808080; color: #FFFFFF" disabled>
+                        <div class="page-text"> 最初<< </div>
+                      </button>
+                    <% end %>
+                    <% while @start_page <= @end_page %>
+                      <% if @start_page != @page %>
+                        <%= link_to datasels_keyword_path(keyword: @keyword, page: @start_page), method: :post do %>
+                          <button type="submit" class="btn" onmouseover="this.style.backgroundColor='#000000'; this.style.color='#FFFFFF'"
+                                                            onmouseout="this.style.backgroundColor='#FFFFFF'; this.style.color='#000000'">
+                            <div class="page-text"> <%= @start_page %> </div>
+                          </button>
+                        <% end %>
+                      <% else %>
+                        <button type="submit" class="btn" style="background-color: #000000; color: #FFFFFF" disabled>
+                          <div class="page-text"> <%= @start_page %> </div>
+                        </button>
+                      <% end %>
+                      <% @start_page += 1 %>
+                    <% end %>
+                    <% if @page != @page_counts %>
+                      <%= link_to datasels_keyword_path(keyword: @keyword, page: @page_counts), method: :post do %>
+                        <button type="submit" class="btn" onmouseover="this.style.backgroundColor='#000000'; this.style.color='#FFFFFF'"
+                                                          onmouseout="this.style.backgroundColor='#FFFFFF'; this.style.color='#000000'">
+                          <div class="page-text"> >>最後 </div>
+                        </button>
+                      <% end %>
+                    <% else %>
+                      <button type="submit" class="btn" style="background-color: #808080; color: #FFFFFF" disabled>
+                        <div class="page-text"> >>最後 </div>
+                      </button>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
